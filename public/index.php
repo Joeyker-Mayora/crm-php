@@ -1,9 +1,8 @@
 <?php
-// Incluir la API (fuera de la carpeta pública) y obtener usuarios
 require_once __DIR__ . '/../backend/api/api.php';
 $allUsers = api_get_all_users();
 
-// Extraer opciones únicas para selects
+//  opciones únicas para selects
 $nombres = array_map(fn($u) => $u['nombre'], $allUsers);
 $paises = array_map(fn($u) => $u['pais'], $allUsers);
 $emails = array_map(fn($u) => $u['email'], $allUsers);
@@ -14,7 +13,7 @@ sort($nombres);
 sort($paises);
 sort($emails);
 
-// Aplicar filtros localmente usando la librería de la API
+//  filtros 
 $nombre = isset($_GET['nombre']) ? trim($_GET['nombre']) : null;
 $pais = isset($_GET['pais']) ? trim($_GET['pais']) : null;
 $email = isset($_GET['email']) ? trim($_GET['email']) : null;
