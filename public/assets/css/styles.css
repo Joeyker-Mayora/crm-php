@@ -1,0 +1,713 @@
+/* =========================
+   VARIABLES REUTILIZABLES
+========================= */
+:root {
+    --color-bg: #f4f6f8;
+    --color-primary: #3498db;
+    --color-text: #333;
+    --color-header: #2c3e50;
+    --color-completed-true: #27ae60;
+    --color-completed-false: #e74c3c;
+    --color-hover: #f1f8ff;
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --padding-cell: 14px 16px;
+    --border-radius: 10px;
+}
+
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   BASE
+========================= */
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+/* =========================
+   HEADER CRM
+========================= */
+header {
+    background-color: var(--color-header);
+    padding: 20px 30px;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+/* Header responsivo para móviles */
+@media (max-width: 768px) {
+    header {
+        padding: 16px 20px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    header h1 {
+        font-size: 19px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 14px 16px;
+    }
+
+    header h1 {
+        font-size: 16px;
+        font-weight: 700;
+    }
+}
+
+/* =========================
+   LAYOUT
+========================= */
+main {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Desktop Extra Grande (1440px+) */
+@media (min-width: 1440px) {
+    main {
+        max-width: 1400px;
+        margin: 50px auto;
+        padding: 0 40px;
+    }
+
+    table {
+        font-size: 15px;
+    }
+
+    th {
+        padding: 16px 18px;
+        font-size: 14px;
+    }
+
+    td {
+        padding: 16px 18px;
+    }
+
+    header h1 {
+        font-size: 26px;
+    }
+}
+
+/* Desktop Grande (1280px) */
+@media (max-width: 1280px) {
+    main {
+        max-width: 1100px;
+        margin: 36px auto;
+        padding: 0 24px;
+    }
+}
+
+/* =========================
+   TABLE CARD
+========================= */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    table-layout: auto;
+}
+
+table.crm-table {
+    margin-bottom: 20px;
+}
+
+/* =========================
+   TABLE HEADER
+========================= */
+th {
+    background-color: var(--color-primary);
+    color: #fff;
+    padding: var(--padding-cell);
+    text-align: left;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* =========================
+   TABLE BODY
+========================= */
+td {
+    padding: var(--padding-cell);
+    border-bottom: 1px solid #eaeaea;
+    font-size: 14px;
+    word-break: break-word;
+    vertical-align: middle;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr {
+    transition: background-color 0.25s ease;
+}
+
+tr:hover {
+    background-color: var(--color-hover);
+}
+
+tbody tr:hover {
+    background-color: #f8fbff;
+}
+
+/* =========================
+   STATUS BADGES
+========================= */
+td.completed-true,
+td.completed-false {
+    font-weight: 600;
+}
+
+td.completed-true::before,
+td.completed-false::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+td.completed-true {
+    color: var(--color-completed-true);
+}
+
+td.completed-true::before {
+    background-color: var(--color-completed-true);
+    box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.2);
+}
+
+td.completed-false {
+    color: var(--color-completed-false);
+}
+
+td.completed-false::before {
+    background-color: var(--color-completed-false);
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}
+
+/* =========================
+   ACCIONES (BOTÓN ELIMINAR)
+========================= */
+.actions-cell {
+    text-align: center;
+}
+
+/* =========================
+   RESPONSIVE (TABLE → CARD)
+========================= */
+/* BREAKPOINT: Tablets (1024px y menores)
+   Usamos un enfoque por tarjetas con `grid` para distribuir campos
+   en columnas (2 columnas en tablet/landscape, 1 columna en móvil). */
+@media (max-width: 1024px) {
+    main {
+        padding: 0 16px;
+    }
+
+    table {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    /* Convertir tabla a tarjetas con grid consistente */
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    thead { display: none; }
+
+    tr {
+        background-color: #fff;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 18px;
+        align-items: center;
+    }
+
+    tr:hover {
+        background-color: #fff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    td {
+        display: block;
+        position: relative;
+        padding: 8px 12px;
+        border-bottom: none;
+        font-size: 14px;
+        min-width: 0;
+    }
+
+    /* Etiqueta visible como bloque encima del valor */
+    td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: 700;
+        color: #2c3e50;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+    }
+
+    /* Acciones siempre ocupan toda la fila */
+    .actions-cell { grid-column: 1 / -1; text-align: right; }
+
+    .delete-btn { width: auto; padding: 8px 10px; font-size: 13px; min-width: unset; }
+}
+
+/* BREAKPOINT: Large Tablets (768px y menores)
+   Mantener grid de 2 columnas, ajustar tamaños y espaciado. */
+@media (max-width: 768px) {
+    header { padding: 16px 20px; }
+    header h1 { font-size: 20px; }
+    main { margin: 32px auto; padding: 0 16px; }
+
+    tr {
+        margin-bottom: 14px;
+        padding: 10px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px 14px;
+    }
+
+    td { padding: 8px 10px; font-size: 13px; }
+    td::before { font-size: 10px; margin-bottom: 4px; }
+
+    .delete-btn { padding: 8px 10px; font-size: 13px; }
+}
+
+/* BREAKPOINT: Medium Screen (640px y menores)
+   Mantener 2 columnas donde quepan, pero prepararse para stack en móvil.
+*/
+@media (max-width: 640px) {
+    header { padding: 14px 16px; }
+    header h1 { font-size: 18px; word-break: break-word; }
+    main { margin: 24px auto; max-width: 100%; }
+
+    tr { grid-template-columns: repeat(2, 1fr); gap: 8px 12px; }
+    th { padding: 12px 14px; font-size: 12px; }
+    td { padding: 8px 10px; font-size: 13px; }
+    td::before { font-size: 10px; }
+
+    .delete-btn { padding: 8px 10px; font-size: 12px; min-width: 80px; }
+    .results-info { font-size: 13px; padding: 10px 12px; }
+}
+
+/* BREAKPOINT: Small Phone (480px y menores)
+   Convertir a una sola columna por tarjeta para máxima legibilidad. */
+@media (max-width: 480px) {
+    header { padding: 12px 12px; }
+    header h1 { font-size: 16px; font-weight: 600; }
+    main { margin: 20px auto; padding: 0 12px; max-width: 100%; }
+
+    table { margin: 0 -12px; width: calc(100% + 24px); border-radius: 0; }
+
+    tr {
+        margin-bottom: 12px;
+        margin-left: 12px;
+        margin-right: 12px;
+        padding: 10px;
+        border-radius: 6px;
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    td {
+        padding: 8px 10px;
+        font-size: 13px;
+        border-bottom: 1px solid #f5f5f5;
+    }
+
+    td:first-child { padding-top: 10px; }
+    td:last-child { padding-bottom: 10px; }
+
+    td::before { font-size: 11px; margin-bottom: 6px; font-weight: 700; }
+
+    .delete-btn { width: 100%; padding: 9px 10px; font-size: 12px; min-width: unset; }
+
+    .results-info {
+        font-size: 12px; padding: 10px 10px; margin-top: 12px;
+        margin-left: -12px; margin-right: -12px; width: calc(100% + 24px); border-radius: 0;
+    }
+
+    /* Status badges en móvil */
+    td.completed-true::before,
+    td.completed-false::before {
+        width: 6px; height: 6px; margin-right: 6px;
+    }
+}
+
+/* BREAKPOINT: Extra Small Phone (<360px) */
+@media (max-width: 360px) {
+    header h1 { font-size: 14px; }
+    main { padding: 0 10px; }
+    table { margin: 0 -10px; width: calc(100% + 20px); }
+    tr { margin-left: 10px; margin-right: 10px; grid-template-columns: 1fr; }
+    td { padding: 8px 8px; font-size: 12px; }
+    td::before { font-size: 10px; margin-bottom: 4px; }
+    .delete-btn { padding: 8px 8px; font-size: 11px; }
+}
+
+/* =========================
+   BOTÓN ELIMINAR
+========================= */
+.delete-btn {
+    display: inline-block;
+    padding: 8px 12px;
+    background: linear-gradient(180deg,#e74c3c,#c0392b);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+    font-size: 14px;
+    min-width: 88px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(192,57,43,0.18);
+}
+
+.delete-btn:active {
+    transform: translateY(0);
+    opacity: .95;
+}
+
+.delete-btn[disabled] {
+    opacity: .5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Tablet response */
+@media (max-width: 768px) {
+    .delete-btn {
+        padding: 8px 10px;
+        font-size: 13px;
+        min-width: 80px;
+    }
+}
+
+/* Mobile response */
+@media (max-width: 480px) {
+    .delete-btn {
+        padding: 9px 10px;
+        font-size: 12px;
+        min-width: unset;
+        width: 100%;
+    }
+}
+/* =========================
+   FORMULARIO DE FILTROS
+========================= */
+.filter-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: var(--border-radius);
+    align-items: flex-end;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.filter-group label {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: var(--color-header);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+}
+
+.filter-group select {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-main);
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3e%3cpolyline points="6 9 12 15 18 9"%3e%3c/polyline%3e%3c/svg%3e');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    padding-right: 36px;
+}
+
+.filter-group select:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.15);
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Tablet response */
+@media (max-width: 1024px) {
+    .filter-form {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+        padding: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-form {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 16px 12px;
+    }
+
+    .filter-group label {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    .filter-group select {
+        padding: 9px 36px 9px 10px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-form {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 12px;
+        margin-left: -12px;
+        margin-right: -12px;
+        width: calc(100% + 24px);
+        border-radius: 0;
+        align-items: stretch;
+    }
+
+    .filter-group label {
+        font-size: 10px;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .filter-group select {
+        padding: 8px 36px 8px 10px;
+        font-size: 12px;
+        border-radius: 6px;
+    }
+}
+
+/* =========================
+   BOTONES DE ACCIÓN
+========================= */
+.btn-search {
+    padding: 10px 20px;
+    background: linear-gradient(180deg, var(--color-primary), #2980b9);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-search:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(52, 152, 219, 0.3);
+}
+
+.btn-search:active {
+    transform: translateY(0);
+}
+
+.btn-reset {
+    padding: 10px 16px;
+    background-color: #95a5a6;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn-reset:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-reset:active {
+    transform: translateY(0);
+}
+
+/* Tablet response */
+@media (max-width: 768px) {
+    .btn-search {
+        padding: 9px 16px;
+        font-size: 13px;
+    }
+
+    .btn-reset {
+        padding: 9px 14px;
+        font-size: 13px;
+    }
+}
+
+/* Mobile response */
+@media (max-width: 480px) {
+    .btn-search {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .btn-reset {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+}
+
+/* =========================
+   INFORMACIÓN DE RESULTADOS
+========================= */
+.results-info {
+    padding: 12px 16px;
+    margin-top: 16px;
+    background-color: #ecf0f1;
+    border-left: 4px solid var(--color-primary);
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.results-info strong {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+/* Tablet response */
+@media (max-width: 768px) {
+    .results-info {
+        font-size: 13px;
+        padding: 11px 14px;
+        margin-top: 14px;
+        border-left-width: 3px;
+    }
+}
+
+/* Mobile response */
+@media (max-width: 480px) {
+    .results-info {
+        font-size: 12px;
+        padding: 10px 12px;
+        margin-top: 12px;
+        border-radius: 4px;
+    }
+
+    /* =========================
+       MODAL DE CONFIRMACIÓN
+    ========================= */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.55);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 99999;
+        padding: 20px;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 180ms ease, visibility 180ms ease;
+    }
+    .modal-overlay[aria-hidden="false"] {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+    .modal {
+        background: #fff;
+        border-radius: 10px;
+        max-width: 480px;
+        width: 100%;
+        padding: 20px 22px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+        z-index: 100000;
+    }
+    .modal h2 { margin-bottom: 8px; font-size: 18px; color: var(--color-header); }
+    .modal p { margin-bottom: 18px; color: #4a5568; }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+    .modal .delete-btn { min-width: 96px; }
+    .modal .btn-reset { background: #bdc3c7; color: #fff; border-radius: 8px; padding: 9px 12px; cursor: pointer; border: none; font-weight: 600; transition: background .12s ease; }
+    .modal .btn-reset:hover { background: #a8aeb5; }
+    .modal .btn-reset[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+    @media (max-width: 480px) {
+        .modal { padding: 16px; }
+        .modal h2 { font-size: 16px; }
+    }
+}
